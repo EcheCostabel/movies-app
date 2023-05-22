@@ -17,7 +17,8 @@ export const HomeScreen = () => {
     const navigation = useNavigation();
     const { moviesCine, isLoading } = useMovies();
 
-    const { top } = useSafeAreaInsets()
+    const { top } = useSafeAreaInsets();
+    
     
     
 
