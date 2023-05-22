@@ -1,23 +1,42 @@
-import React, { useEffect, useState} from 'react'
-import movieDB from '../api/movieDB'
-import { Movie, MovieDBMoviesResponse } from '../interfaces/movieInterface'
+import React, { useEffect, useState} from 'react';
+import movieDB from '../api/movieDB';
+import { Movie, MovieDBMoviesResponse } from '../interfaces/movieInterface';
+
+
+interface MoviesState {
+    nowPlaying: Movie[]
+    popular: Movie[]
+    topRated: Movie[]
+    upcoming: Movie[]
+}
 
 export const useMovies = () => {
 
     const [ isLoading, setIsLoading ] = useState(true)
-    const [ moviesCine , setMoviesCine ] = useState<Movie[]>([])
-    const [ moviesPopulars , setMoviesPopulars ] = useState<Movie[]>([])
+    const [ moviesState , setMoviesState ] = useState<MoviesState>({
+        nowPlaying : [],
+        popular : [],
+        topRated : [],
+        upcoming : [],
+    })
+    
 
     const getMovies = async( ) => {
 
-        const respNowPlaying = await movieDB.get<MovieDBMoviesResponse>('/now_playing');
-        const respPopular = await movieDB.get<MovieDBMoviesResponse>('/popular');
+        const nowPlayingPromise = movieDB.get<MovieDBMoviesResponse>('/now_playing');
+        const popularPromise    = movieDB.get<MovieDBMoviesResponse>('/popular');
+        const topRatedPromise   = movieDB.get<MovieDBMoviesResponse>('/top_rated');
+        const upcomingPromise   = movieDB.get<MovieDBMoviesResponse>('/upcoming');
 
-        await movieDB.get<MovieDBMoviesResponse>('/top_rated');
-        await movieDB.get<MovieDBMoviesResponse>('/upcoming');
+        // Esto es para hacer todas las peticiones juntas y que no se tengan que esperar
+        const response = await Promise.all([nowPlayingPromise, popularPromise, topRatedPromise, upcomingPromise])
 
-        setMoviesCine(respNowPlaying.data.results)
-        setMoviesPopulars(respPopular.data.results)
+        setMoviesState({
+            nowPlaying:  response[0].data.results ,
+            popular:  response[1].data.results ,
+            topRated:  response[2].data.results ,
+            upcoming: response[3].data.results  ,
+        })
 
         setIsLoading(false)
        
@@ -30,9 +49,9 @@ export const useMovies = () => {
 
 
     return {
-        moviesCine,
-        moviesPopulars,
+        ...moviesState,
         isLoading,
+
     }
 
 }

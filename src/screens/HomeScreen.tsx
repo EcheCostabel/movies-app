@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ActivityIndicator, Text, View, Dimensions, FlatList, ScrollView } from 'react-native';
+import { ActivityIndicator,  View, Dimensions,  ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useMovies } from '../hooks/useMovies';
 import { MovieCard } from '../components/MovieCard';
@@ -16,7 +16,7 @@ const { width: windowWidth } = Dimensions.get('window')
 export const HomeScreen = () => {
 
     const navigation = useNavigation();
-    const { moviesCine, isLoading, moviesPopulars } = useMovies();
+    const { nowPlaying, isLoading, popular, topRated, upcoming } = useMovies();
 
     const { top } = useSafeAreaInsets();
     
@@ -40,7 +40,7 @@ export const HomeScreen = () => {
           {/* Carrusel Principal  */}
           <View style={{height: 440,}}>
             <Carousel 
-              data={moviesCine}
+              data={nowPlaying}
               renderItem={({ item }: any) => <MovieCard movie = {item} /> }
               sliderWidth={windowWidth}
               itemWidth={300}
@@ -48,10 +48,12 @@ export const HomeScreen = () => {
               />
           </View>
 
-          {/* Peliculas Populares */}
+         
           
           
-          <HorizontalSlider title='Populares'movies={moviesPopulars}/>
+          <HorizontalSlider title='Popular'movies={popular}/>
+          <HorizontalSlider title='Top Rated'movies={topRated}/>
+          <HorizontalSlider title='Upcoming'movies={upcoming}/>
       </View>
     </ScrollView>
   )
