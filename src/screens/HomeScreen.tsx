@@ -8,6 +8,7 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
+import { HorizontalSlider } from '../components/HorizontalSlider';
 
 const { width: windowWidth } = Dimensions.get('window')
 
@@ -43,24 +44,13 @@ export const HomeScreen = () => {
               renderItem={({ item }: any) => <MovieCard movie = {item} /> }
               sliderWidth={windowWidth}
               itemWidth={300}
+              inactiveSlideOpacity={0.9}
               />
           </View>
 
           {/* Peliculas Populares */}
-          <View style={{backgroundColor: 'red', height: 260}}>
-            <Text style={{fontSize: 30, fontWeight: 'bold'}}>En cine</Text>
-            <FlatList 
-              data={moviesCine}
-              renderItem={({ item }: any) =>( 
-                <MovieCard movie = {item} width={140} height={200}/> 
-              )}
-              keyExtractor={(item) => item.id.toString()}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            />
-
-          </View>
-
+          
+          <HorizontalSlider title='En cine'movies={moviesCine}/>
       </View>
     </ScrollView>
   )
