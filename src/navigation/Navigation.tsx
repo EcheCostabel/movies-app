@@ -15,9 +15,7 @@ export const Navigation = () => {
   return (
     <Stack.Navigator
         screenOptions={{
-            cardStyle: {
-                backgroundColor: 'white'
-            },
+            
             headerShown: false
         }}
         
