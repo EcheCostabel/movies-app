@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ActivityIndicator,  View, Dimensions,  ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { useMovies } from '../hooks/useMovies';
 import { MovieCard } from '../components/MovieCard';
 import {
@@ -15,7 +14,6 @@ const { width: windowWidth } = Dimensions.get('window')
 
 export const HomeScreen = () => {
 
-    const navigation = useNavigation();
     const { nowPlaying, isLoading, popular, topRated, upcoming } = useMovies();
 
     const { top } = useSafeAreaInsets();
