@@ -1,20 +1,10 @@
 import React, { useRef  } from 'react'
 import { View, Animated, Button } from 'react-native'
+import { useFade } from '../hooks/useFade'
 
 export const FadeScreen = () => {
 
-    const opacity = useRef( new Animated.Value(0.5) ).current;
-
-    const fadeIn = () => {
-        Animated.timing(
-            opacity,
-            {
-                toValue: 1,
-                duration: 1000,
-                useNativeDriver: true
-            }
-        ).start();
-    }
+   const { fadeIn, fadeOut, opacity } = useFade()
 
   return (
     <View style={{
@@ -31,13 +21,18 @@ export const FadeScreen = () => {
             borderColor: 'white',
             borderWidth: 5,
             marginBottom: 10,
-            opacity: opacity
+            opacity
         }}
         />
 
         <Button
             title='fadein'
             onPress={fadeIn}
+        />
+
+        <Button
+            title='fadeout'
+            onPress={fadeOut}
         />
 
     </View>
