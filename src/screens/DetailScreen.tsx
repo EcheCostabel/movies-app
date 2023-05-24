@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { useMovieDetails } from '../hooks/useMovieDetails';
 import { ActivityIndicator } from 'react-native';
 import { MovieDetails } from '../components/MovieDetails';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const screenHeight = Dimensions.get('screen').height
@@ -21,10 +22,12 @@ export const DetailScreen = ({route, navigation}: Props) => {
 
   const { isLoading, cast, movieFull } =  useMovieDetails(movie.id);
 
+
+
   
 
   return (
-
+<SafeAreaView>
     <ScrollView>
         <View style={styles.imageContainer}>
           <View style={styles.imageBorder}>
@@ -52,13 +55,12 @@ export const DetailScreen = ({route, navigation}: Props) => {
               <Icon 
                 color='white'
                 name='arrow-back-outline'
-                size={50}
-                style={{padding: 10}}
+                size={40}
+                style={{padding: 15}}
                 />
           </TouchableOpacity>
-      
-        
-    </ScrollView>
+     </ScrollView>
+ </SafeAreaView>
   )
 };
 

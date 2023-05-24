@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useMovies } from '../hooks/useMovies';
 import { MovieCard } from '../components/MovieCard';
 import {
-  SafeAreaProvider,
+  SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
@@ -32,9 +32,9 @@ export const HomeScreen = () => {
     }
     
   return (
-    <ScrollView>
+    <SafeAreaView>
 
-    
+    <ScrollView>
       <View style={{marginTop: top + 20}}>
 
           {/* Carrusel Principal  */}
@@ -56,5 +56,6 @@ export const HomeScreen = () => {
           <HorizontalSlider title='Upcoming'movies={upcoming}/>
       </View>
     </ScrollView>
+              </SafeAreaView>
   )
 }
