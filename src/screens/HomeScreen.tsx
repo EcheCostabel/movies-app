@@ -7,6 +7,7 @@ import Carousel from 'react-native-snap-carousel';
 import { HorizontalSlider } from '../components/HorizontalSlider';
 import { GradientBackground } from '../components/GradientBackground';
 
+
 const { width: windowWidth } = Dimensions.get('window')
 
 
@@ -26,6 +27,15 @@ export const HomeScreen = () => {
         </View>
       )
     }
+
+    // const getPosterColors = async(index: number) => {
+    //     const movie = nowPlaying[index]
+    //     const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+    //     const colors = await ImageColors.getColors(uri)
+    //     console.log(colors)
+        
+    // }
     
   return (
     <GradientBackground>
@@ -40,12 +50,9 @@ export const HomeScreen = () => {
                   sliderWidth={windowWidth}
                   itemWidth={300}
                   inactiveSlideOpacity={0.9}
+                  // onSnapToItem={(index => getPosterColors(index))}
                   />
               </View>
-
-            
-              
-              
               <HorizontalSlider title='Popular'movies={popular}/>
               <HorizontalSlider title='Top Rated'movies={topRated}/>
               <HorizontalSlider title='Upcoming'movies={upcoming}/>
